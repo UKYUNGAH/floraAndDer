@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flora & Dér</title>
+    <link rel="stylesheet" href="/public/css/admin.css" />
+    <link rel="stylesheet" href="/public/css/common.css" />
+    <link rel="stylesheet" href="/public/css/reset.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="header-wrap">
+          <h1>
+            <a href="index.html">
+              <img src="/public/img/logo.png" alt="로고" />
+            </a>
+          </h1>
+          <div class="h-right">
+            <a href="#">LOGIN</a>
+            <a href="#">MY PAGE</a>
+            <a href="#" class="nav-cart">CART<span class="cart-num">1</span></a>
+          </div>
+        </div>
+      </header>
+      <nav class="nav">
+        <div class="nav-wrap">
+          <div class="nav-left">
+            <a href="/admin/orders.html">주문관리</a>
+            <a href="/admin/products.html">상품관리</a>
+            <a href="/admin/users.html">회원관리</a>
+            <a href="/admin/categories.html">카테고리관리</a>
+          </div>
+        </div>
+      </nav>
+      <main class="admin-container">
+        <div class="admin-product-category">
+          <p>상품번호</p>
+          <p>카테고리</p>
+          <p>상품명</p>
+          <p>이미지</p>
+          <p>가격</p>
+          <p>재고</p>
+          <p>상세설명</p>
+          <p>크기</p>           
+          <p>원산지</p>
+          <p>제품특징</p>
+        </div>
+        <!--  상품 정보 데이터 -->
+        <div class="admin-product-data">
+          <p class="product-id">65d7127be6e1b1c823baf732</p>
+          <p class="product-category">CUSTOM</p>
+          <p class="product-title">장미 꽃다발</p>
+          <img src="/" class="product-img"></img>
+          <p class="product-price">20000</p>
+          <p class="product-stock">50</p>
+          <p class="product-description">아름다운 장미 꽃다발...</p>
+          <p class="product-size">Large</p>
+          <p class="product-origin">Korea</p>
+          <p class="product-attribute">빨간 꽃잎의...</p>
+          <div>
+            <button class="btn product-update">상품수정</button>
+            <button class="btn product-delete">상품삭제</button>
+          </div>
+        </div>
+
+      </main>
+      <p class="product-add">+ 상품 추가</p>
+      <footer class="site-footer">
+        <div class="footer-content">
+          <p>© 2023. Flora & Dér All rights reserved.</p>
+          <p>
+            주식회사 엘리스트랙ㅣ대표자 엘리스ㅣ123-45-67891
+            [사업자정보확인]ㅣ2024-서울-00123ㅣ서울특별시 성동구 아차산로17길
+            48, 성수낙낙 2층
+          </p>
+          <p>
+            <a href="tel:+82-123-1234">02-123-1234</a> ㅣ
+            contact@floraandder.krㅣ <a href="#">카카오톡 채널</a>ㅣ<a href="#"
+              >인스타그램</a
+            >
+            | MON-FRI 10:00-17:00 | <a href="#">이용약관</a> ㅣ
+            <a href="#">개인정보처리방침</a>
+          </p>
+        </div>
+        <div class="footer-right"></div>
+      </footer>
+    </div>
+  </body>
+  <script src="/public/js/admin/product.js"></script>
+</html>

@@ -26,7 +26,7 @@
 .admin-container > .admin-content-category {
   border-bottom: 1px solid #000;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(8, 1fr);
   grid-template-rows: 40px;
   align-items: center;
   padding: 20px 40px;
@@ -39,7 +39,7 @@
 .admin-container > .admin-content-data {
   display: grid;
   border-bottom: 1px solid #000;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(8, 1fr);
   grid-template-rows: 80px;
   align-items: center;
   padding: 20px 40px;
@@ -55,6 +55,9 @@
   background-color: #000;
   color: white;
   padding: 10px;
+}
+.user-data {
+  font-size: 13px;
 }
 
 /* ---------- Product Section ---------- */
@@ -103,6 +106,7 @@
   padding: 4px;
   width: 90%;
 }
+/* 이미지 파일 받는 input인데 class로 선택하면 스타일 적용이 안됩니다..*/
 #input-img {
   display: none;
 }
@@ -115,7 +119,7 @@
   padding: 10px;
 }
 
-/* ---------- Product Section ---------- */
+/* ---------- Category Section ---------- */
 /* Product Category Header */
 .admin-container > .admin-category-header {
   border-bottom: 1px solid #000;
@@ -150,7 +154,7 @@
   cursor: pointer;
 }
 
-#category-isActive {
+.category-isActive {
   border: 1px solid black;
 }
 
@@ -163,12 +167,12 @@
   text-align: center;
 }
 
-/* ---------- Product Section ---------- */
+/* ---------- User Section ---------- */
 /* Product Category Header */
 .admin-container > .admin-user-category {
   border-bottom: 1px solid #000;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 30px;
   align-items: center;
   padding: 20px 40px;
@@ -180,7 +184,7 @@
 .admin-container > .admin-user-data {
   display: grid;
   border-bottom: 1px solid #000;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 20px;
   align-items: center;
   padding: 20px 40px;

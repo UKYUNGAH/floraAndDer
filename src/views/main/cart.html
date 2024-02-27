@@ -37,7 +37,7 @@
                 <div class="cart-head">
                     <div class="cart-head-left">
                         <span class="chl1">
-                          <input type="checkbox" id="cart-all-ck">
+                          <input type="checkbox" name="cart-all-ck" id="cart-all-ck">
                           <label for="cart-all-ck"><em></em></label>
                         </span>
                         <span class="chl2">상품정보</span>
@@ -52,7 +52,7 @@
                     <div class="cart-body-left">
                         <!-- cart-list 가 장바구니 목록임 이거만 늘어나게 하면됨 ! -->
                         <!-- <div class="cart-list"  id="checkboxList">
-                            <span class="cl-list-1">
+                            <span class="cl-list-1" name="cart-input">
                                 <input type="checkbox" id="cart-ck1">
                                 <label for="cart-ck1"><em></em></label>
                             </span>
@@ -104,10 +104,10 @@
 
             <!-- 상품가격의 합계가 들어가는 곳 -->
             <div class="cart-total">
-                <div class="ct-title">총 주문 상품 2개</div>
+                <div class="ct-title">총 주문 상품 <span class="products-quantity"></span>개</div>
                 <div class="ct-wrap">
                     <div class="ct-common ct-left">
-                        <h4>3,000,000원</h4>
+                        <h4 class="products-price"></h4>
                         <p>상품금액</p>
                     </div>
                     <div class="ct-common ct-add">
@@ -115,7 +115,7 @@
                         <span></span>
                     </div>
                     <div class="ct-common ct-mid">
-                        <h4>착불</h4>
+                        <h4 class="delivery-price">착불</h4>
                         <p>배송비</p>
                     </div>
                     <div class="ct-common ct-add">
@@ -123,7 +123,7 @@
                         <span></span>
                     </div>
                     <div class="ct-common ct-right">
-                        <h4>3,000,000원</h4>
+                        <h4 class="total-price"></h4>
                         <p>총 주문금액</p>
                     </div>
                 </div>
@@ -190,6 +190,6 @@
       </div>
     </footer>
   </body>
-  <script src="/public/js/detail.js"></script>
+  <script src="/public/js/common_cart.js"></script>
   <script src="/public/js/cart.js"></script>  
 </html>

@@ -1,53 +1,6 @@
-// import { API_URL } from '/public/js/constants.js'
-
-const getOrders = async () => {
-  const token = localStorage.getItem('jwt')
-  const res = await fetch('http://localhost:8081/api/v1/admin/orders', {
-    method: 'GET',
-    headers: {
-      Authorization: token,
-    },
-  })
-  const orderDatas = await res.json()
-  console.log(orderDatas)
-  const adminContainerEl = document.querySelector('.admin-container')
-
-  orderDatas.data.forEach(data => {
-    const itemTitles = data.order_items.map(item => item.title).join(', ')
-    adminContainerEl.insertAdjacentHTML(
-      'beforeend',
-      `
-      <div class="admin-content-data">
-          <p class="order-id" data-order-id=${data._id}>${data._id}</p>
-          <p class="order-status">${data.order_status}</p>
-          <p class="order-cancel-req">${data.cancel_req}</p>
-          <p class="order-date">${data.order_date.slice(0, 10)}</p>
-          <div class="user-data">
-            <p class="user-name">${data.customer_info.name}</p>
-            <p class="user-email">${data.customer_info.email}</p>
-            <p class="user-number">${data.customer_info.phone_number}</p>
-            <p class="user-address">
-              ${data.shipping_info.address}<br /> ${
-        data.shipping_info.address_detail
-      }
-            </p>
-          </div>
-          <p class="order-product">${itemTitles}</p>
-          <p>${data.order_amount}원</p>
-          <div>
-            <button class="btn order-update">주문수정</button>
-            <button class="btn order-delete">주문취소</button>
-          </div>
-        </div>
-      `
-    )
-  })
-}
-getOrders()
-
 // 관리자 컨테이너에서 발생하는 클릭 이벤트 처리
-const adminContainerEl = document.querySelector('.admin-container')
-adminContainerEl.addEventListener('click', e => {
+const adminContainer = document.querySelector('.admin-container')
+adminContainer.addEventListener('click', e => {
   if (e.target.className.includes('order-update')) {
     handleUpdateOrder(e)
   } else if (e.target.className.includes('order-delete')) {
@@ -63,6 +16,7 @@ function handleUpdateOrder(e) {
   // 주문 수정 모드 진입
   // 기존 주문 정보를 기반으로 수정 폼 생성 및 데이터 세팅
   if (!e.target.innerHTML === '주문수정') return
+  console.log(1)
   function createElement(type, attributes, ...children) {
     const element = document.createElement(type)
     for (const key in attributes) {
@@ -96,7 +50,15 @@ function handleUpdateOrder(e) {
       selector: '.order-status',
       type: 'select',
       class: 'product-input order-status1',
-      options: ['입금확인중', '배송준비중', '배송중', '배송완료'],
+      options: [
+        '입금확인중',
+        '입금완료',
+        '배송준비중',
+        '배송중',
+        '배송지연',
+        '배송완료',
+        '주문처리완료',
+      ],
       prop: 'value',
       from: 'innerHTML',
     },
@@ -155,18 +117,12 @@ function handleDeleteOrder(e) {
   if (!e.target.classList.contains('order-delete')) return
   const parent = e.target.parentNode.parentNode
   const id = parent.querySelector('.order-id').innerHTML
-  const token = localStorage.getItem('jwt')
-  fetch(`http://localhost:8081/api/v1/admin/orders/${id}`, {
+  fetch(`/admin/orders/${id}`, {
     method: 'DELETE',
-    headers: {
-      Authorization: token,
-    },
   })
     .then(response => {
-      if (response.ok) {
-        location.reload()
-      } else {
-        console.error('주문삭제를 실패하였습니다.')
+      if (response.redirected) {
+        window.location.href = response.url
       }
     })
     .catch(error => {
@@ -187,22 +143,17 @@ function handleOrderSave(e) {
   const datas = {
     order_status: document.querySelector('.order-status1').value,
   }
-  const parent = e.target.parentNode.parentNode
-  const id = parent.querySelector('.order-id').innerHTML
-  const token = localStorage.getItem('jwt')
-  fetch(`http://localhost:8081/api/v1/admin/orders/${id}`, {
+  const id = e.target.parentNode.parentNode.querySelector('.order-id').innerHTML
+  fetch(`/admin/orders/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: token,
     },
     body: JSON.stringify(datas),
   })
     .then(response => {
-      if (response.ok) {
-        location.reload()
-      } else {
-        console.error('주문수정을 실패하였습니다.')
+      if (response.redirected) {
+        window.location.href = response.url
       }
     })
     .catch(error => {

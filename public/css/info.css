@@ -1,4 +1,4 @@
-.container {
+.container{
     width: 100%;
 }
 
@@ -67,7 +67,7 @@
 }
 
 /* ----- bottom ----- */
-.info .info-wrap .info-box .faq-list .list-bottom.last {
+.info .info-wrap .info-box .faq-list .list-bottom.last{
     border-bottom: 1px solid #000;
     box-sizing: border-box;
 }
@@ -75,12 +75,8 @@
 /* ----- bottom > answer ----- */
 .info .info-wrap .info-box .faq-list .list-bottom .answer.off {
     display: none;
+    transition: all .35s;
     overflow: hidden;
-}
-
-.info .info-wrap .info-box .faq-list .list-bottom .answer p {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 12px;
-    padding-left: 94px;
+    margin-left: 92px;
+    margin-bottom: 12px;
 }

@@ -9,7 +9,6 @@ const ordererName = document.querySelector(".orderer-name");
 const ordererPhone = document.querySelector(".orderer-phone");
 const recipientName = document.querySelector(".recipient-name-input");
 const recipientPhone = document.querySelector(".recipient-phone-input");
-
 function handleCheckboxChange() {
   const jwtJSON = window.localStorage.getItem(LOCALSTORAGE_JWT);
   const $address = document.querySelector(".address-input");
@@ -38,8 +37,9 @@ checkbox.addEventListener("change", handleCheckboxChange);
 
 /* 배송 메시지 직접 입력 */
 const selectDeliveryMsg = document.querySelector(".delivery-msg");
-const directInput = document.querySelector(".direct-input");
+
 function handleSelectChange(select) {
+  const directInput = document.querySelector(".direct-input");
   const selectOption = select.target.value;
   if (selectOption === "직접 입력") {
     directInput.style.display = "inline-block";
@@ -153,7 +153,6 @@ $payAmount.innerHTML = `${(orderAmount + deliveryFee).toLocaleString()}원`;
 
 /* 결제하기 버튼 */
 const paymentBtn = document.querySelector(".payment-button");
-
 function isPurchase() {
   // 확인 메시지를 표시하고 사용자의 선택을 확인
   const confirmPurchase = confirm("구매하시겠습니까?");

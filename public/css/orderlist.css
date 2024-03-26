@@ -10,7 +10,6 @@
 }
 
 .orderlist {
-  display: none;
   padding: 24px;
   margin: 122px 128px 200px 128px;
 }
@@ -87,10 +86,6 @@ td {
 .change-address {
   display: block;
   margin-bottom: 5px;
-}
-
-.quantity-span {
-  color: #555 !important;
 }
 
 /* change-address modal */
@@ -174,16 +169,6 @@ td {
 }
 
 .confirm-button {
-  margin-right: 15px;
-}
-
-.button-div {
-  display: flex;
-  width: 100%;
-}
-
-.button-div > button {
-  display: flex;
   width: 100%;
   padding: 10px;
   justify-content: center;

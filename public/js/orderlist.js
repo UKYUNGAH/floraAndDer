@@ -2,7 +2,7 @@ import { API_URL } from "/public/js/constants.js";
 const LOCALSTORAGE_JWT = "jwt";
 
 // 회원탈퇴
-const deleteBox = document.querySelector('.delete');
+const deleteBox = document.querySelector(".delete");
 
 /***** orderlist.html 진입 시, order API GET해와서 주문조회 데이터 렌더링 *****/
 document.addEventListener("DOMContentLoaded", () => {
@@ -505,7 +505,7 @@ function closeChangeAddressModal() {
 /* 모달 닫기 이벤트리스너 
  이거 함수로 만들어서 관리해야함 - 배송지 변경에도 사용하기 때문에.. */
 const closeButton = document.querySelector(".close");
-const cancelButtonInModal = document.querySelector(".cancel-button");
+const confirmButton = document.querySelector(".confirm-button");
 closeButton.addEventListener("click", closeChangeAddressModal);
 cancelButtonInModal.addEventListener("click", closeChangeAddressModal);
 
@@ -609,84 +609,93 @@ function validation() {
   return false;
 }
 
-deleteBox.addEventListener('click', () => {
-  if (confirm('가입된 회원정보가 모두 삭제되며 복구되지 않습니다. 회원 탈퇴를 진행하시겠습니까?')) {
-      // 주문조회
-      if (localStorage.getItem('jwt')) {
-          const jwt = localStorage.getItem('jwt');
-          fetch(`${API_URL}user/order`, {
-              method: 'GET',
-              headers: {
-                  "Content-Type": "application/json",
-                  "authorization": `${jwt}`
-              }
-          }).then(res => res.json())
-              .then(res => {
-                  // 에러 있을 경우
-                  if (res.error === 'jwt expired') {
-                      localStorage.removeItem('jwt');
-                      alert('로그인 인증이 만료되었습니다.');
-                      location.href = '/user/login.html';
-                      return false;
-                  }
+deleteBox.addEventListener("click", () => {
+  if (
+    confirm(
+      "가입된 회원정보가 모두 삭제되며 복구되지 않습니다. 회원 탈퇴를 진행하시겠습니까?"
+    )
+  ) {
+    // 주문조회
+    if (localStorage.getItem("jwt")) {
+      const jwt = localStorage.getItem("jwt");
+      fetch(`${API_URL}user/order`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `${jwt}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          // 에러 있을 경우
+          if (res.error === "jwt expired") {
+            localStorage.removeItem("jwt");
+            alert("로그인 인증이 만료되었습니다.");
+            location.href = "/user/login.html";
+            return false;
+          }
 
-                  if (res.error) {
-                      alert('회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
-                      location.href = '/index.html';
-                      return false;
-                  }
+          if (res.error) {
+            alert(
+              "회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요."
+            );
+            location.href = "/index.html";
+            return false;
+          }
 
-                  // 에러 없을 경우
-                  if (!res.error) {
-                      // 주문조회 결과 주문내역이 없을 경우 회원탈퇴 진행
-                      if (!res.data) deleteAccount(jwt);
+          // 에러 없을 경우
+          if (!res.error) {
+            // 주문조회 결과 주문내역이 없을 경우 회원탈퇴 진행
+            if (!res.data) deleteAccount(jwt);
 
-                      // 주문조회 결과 주문내역이 있을 경우
-                      if (res.data) {
-                          let orderStatus;
-                          res.data.forEach(e => {
-                              // '배송완료'를 제외한 주문이 있을 경우 orderStatus = true;
-                              if (e.order_status !== '배송완료') orderStatus = true;
-                          })
-                          if (orderStatus) {
-                              alert('진행중인 주문이 있어 회원탈퇴가 불가합니다.');
-                              location.href = '/index.html';
-                          }
-                          else deleteAccount(jwt);
-                      }
-                  }
-              })
-      }
+            // 주문조회 결과 주문내역이 있을 경우
+            if (res.data) {
+              let orderStatus;
+              res.data.forEach((e) => {
+                // '배송완료'를 제외한 주문이 있을 경우 orderStatus = true;
+                if (e.order_status !== "배송완료") orderStatus = true;
+              });
+              if (orderStatus) {
+                alert("진행중인 주문이 있어 회원탈퇴가 불가합니다.");
+                location.href = "/index.html";
+              } else deleteAccount(jwt);
+            }
+          }
+        });
+    }
   }
-})
+});
 
 function deleteAccount(jwt) {
   fetch(`${API_URL}user/me`, {
-      method: 'DELETE',
-      headers: {
-          "Content-Type": "application/json",
-          "authorization": `${jwt}`
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `${jwt}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.error === "jwt expired") {
+        localStorage.removeItem("jwt");
+        alert("로그인 인증이 만료되었습니다.");
+        location.href = "/user/login.html";
+        return false;
       }
-  }).then(res => res.json())
-      .then(res => {
-          if (res.error === 'jwt expired') {
-              localStorage.removeItem('jwt');
-              alert('로그인 인증이 만료되었습니다.');
-              location.href = '/user/login.html';
-              return false;
-          }
 
-          if (res.error === 'Resource not found') {
-              alert('회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
-              location.href = '/index.html';
-              return false;
-          }
+      if (res.error === "Resource not found") {
+        alert(
+          "회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요."
+        );
+        location.href = "/index.html";
+        return false;
+      }
 
-          if (!res.error) {
-              localStorage.removeItem('jwt');
-              alert('회원탈퇴가 정상적으로 완료되었습니다.');
-              location.href = '/index.html';
-              return false;
-          }
-      })
+      if (!res.error) {
+        localStorage.removeItem("jwt");
+        alert("회원탈퇴가 정상적으로 완료되었습니다.");
+        location.href = "/index.html";
+        return false;
+      }
+    });
 }

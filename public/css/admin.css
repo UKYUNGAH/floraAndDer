@@ -56,9 +56,6 @@
   color: white;
   padding: 10px;
 }
-.user-data {
-  font-size: 13px;
-}
 
 /* ---------- Product Section ---------- */
 /* Product Category Header */
@@ -106,7 +103,6 @@
   padding: 4px;
   width: 90%;
 }
-/* 이미지 파일 받는 input인데 class로 선택하면 스타일 적용이 안됩니다..*/
 #input-img {
   display: none;
 }
@@ -159,7 +155,7 @@
   cursor: pointer;
 }
 
-.category-isActive {
+#category-isActive {
   border: 1px solid black;
 }
 
@@ -172,7 +168,7 @@
   text-align: center;
 }
 
-/* ---------- User Section ---------- */
+/* ---------- Product Section ---------- */
 /* Product Category Header */
 .admin-container > .admin-user-category {
   border-bottom: 1px solid #000;
